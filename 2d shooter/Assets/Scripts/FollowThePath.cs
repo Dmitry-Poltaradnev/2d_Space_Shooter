@@ -5,17 +5,17 @@ using UnityEngine;
 public class FollowThePath : MonoBehaviour
 {
     //Нам необходим массив в котором будут точки пути по которому будет передвигаться наш враг
-    public Transform[] path_Points;
+    [HideInInspector] public Transform[] path_Points;
 
     //Необходима переменная скорости с которой будет перемещаться враг.
-    public float speed_Enemy;
+    [HideInInspector] public float speed_Enemy;
 
     //Логическая переменная исходя из которой когда враг будет в последней точке пути в зависимости от значения данной переменной, он будет либо уничтожен,либо начнёт свой путь с первой точки пути.
-    public bool is_Return;
+    [HideInInspector] public bool is_Return;
 
 
     //Необходим массив для хранения векторов.--------------------------------------
-    public Vector3[] _new_Position;
+    [HideInInspector] public Vector3[] _new_Position;
 
     //Нам необходима переменная для хранения порядкового номера точки пути. Благодаря ей враг будет знать куда ему двигаться.
     private int cur_Pos;
@@ -66,7 +66,26 @@ public class FollowThePath : MonoBehaviour
         {
             pathPositions[i] = pathPos[i].position;
         }
+        pathPositions = Smoothing(pathPositions);
+        pathPositions = Smoothing(pathPositions);
+        pathPositions = Smoothing(pathPositions);
         return pathPositions;
+    }
+    //Добавляем метод из скрипта wave для сглаживания движения.
+    Vector3[] Smoothing(Vector3[] path_Positions)
+    {
+        Vector3[] new_Path_Positions = new Vector3[(path_Positions.Length - 2) * 2 + 2];
+        new_Path_Positions[0] = path_Positions[0];
+        new_Path_Positions[new_Path_Positions.Length - 1] = path_Positions[path_Positions.Length - 1];
+
+        int j = 1;
+        for (int i = 0; i < path_Positions.Length - 2; i++)
+        {
+            new_Path_Positions[j] = path_Positions[i] + (path_Positions[i + 1] - path_Positions[i]) * 0.75f;
+            new_Path_Positions[j + 1] = path_Positions[i + 1] + (path_Positions[i + 2] - path_Positions[i + 1]) * 0.25f;
+            j += 2;
+        }
+        return new_Path_Positions;
     }
 
 }
