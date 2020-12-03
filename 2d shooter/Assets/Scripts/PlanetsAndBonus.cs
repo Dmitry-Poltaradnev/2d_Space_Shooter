@@ -41,7 +41,7 @@ public class PlanetsAndBonus : MonoBehaviour
             // Создаём её + должна учитываться ширина экрана + высота экрана.+ случайное направление под углом.
             GameObject newPlanet = Instantiate(planetsList[RandomIndex],
                 new Vector2(Random.Range(MovePlayer.instanse.borders.minX, MovePlayer.instanse.borders.maxX),
-                MovePlayer.instanse.borders.maxY * 1.5f),
+                MovePlayer.instanse.borders.maxY * 2f),
                 Quaternion.Euler(0, 0, Random.Range(-25, 25)));
 
 

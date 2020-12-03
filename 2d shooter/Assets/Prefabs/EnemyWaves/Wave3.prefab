@@ -200,13 +200,13 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   shottingSettings:
-    shot_Chance: 0
+    shot_Chance: 40
     shot_Timer_Min: 1
-    shot_Timer_Max: 4
-  obj_Enemy: {fileID: 6497025579934314532, guid: e31ef32e90974ce42806af655fb42e7f, type: 3}
-  count_in_Wave: 10
-  speed_Enemy: 4
-  time_Spawn: 1
+    shot_Timer_Max: 3
+  obj_Enemy: {fileID: 6497025579934314532, guid: 55e6735ec40b95144b7f6966d8520291, type: 3}
+  count_in_Wave: 9
+  speed_Enemy: 7
+  time_Spawn: 0.4
   path_Points:
   - {fileID: 9065157381945056556}
   - {fileID: 9065157383367543092}

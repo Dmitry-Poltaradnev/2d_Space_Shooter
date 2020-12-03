@@ -45,7 +45,10 @@ public class DestroyAll : MonoBehaviour
         {
             case "Planet":
                 Destroy(coll.gameObject);
-                break;             
+                break;
+            case "Bullet":// Правка для уничтожения пуль при выходе за пределы экрана.
+                Destroy(coll.gameObject);
+                break;
         }
     }
 
