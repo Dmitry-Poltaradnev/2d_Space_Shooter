@@ -171,7 +171,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 16325f3af14a5214daf52e1b35421b53, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  enemy_Health: 3
+  enemy_Health: 2
   obj_Bullet: {fileID: 9144932695722573973, guid: 62a21682104566a4eb3cdf2fddcf1c92, type: 3}
   shot_Time_Min: 1.05
   shot_Time_Max: 2.8
