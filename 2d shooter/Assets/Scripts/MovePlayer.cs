@@ -56,6 +56,7 @@ public class MovePlayer : MonoBehaviour
         if (Input.GetMouseButton(0))//Проверяем была ли нажата левая клавиша мыши
         {
             _mouse_Position = _camera.ScreenToWorldPoint(Input.mousePosition);// При нажатии на экран записываем координаты места нажатия по экрану.
+            _mouse_Position.y += 1.5f;
             transform.position = Vector2.MoveTowards(transform.position, _mouse_Position, speed_Player * Time.deltaTime); // Перемещаем нашего игрока на котором висит данный скрипт в 2D координаты от нашего нажатия по экрану.
         }
         transform.position = new Vector2(Mathf.Clamp(transform.position.x, borders.minX, borders.maxX), // Если игрок пытаеться выйти за границы экрана, то он останавливается.
