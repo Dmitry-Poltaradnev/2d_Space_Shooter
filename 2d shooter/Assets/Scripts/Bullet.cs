@@ -37,7 +37,14 @@ public class Bullet : MonoBehaviour
         {
             coll.GetComponent<MoveEnemy>().GetDamage(damage);
 
-            //Также полсе столкновения вызываем метод  Destruction();
+            //Также после столкновения вызываем метод  Destruction();
+            Destruction();
+        }
+        //При условии принадлежности пули врагу, и столкновении со щитом, то вызываем метод повреждения щита.
+        else if (is_Enemy_Bullet && coll.tag == "Shield")
+        {
+            Player.instance.GetDamageShield(damage);
+            //После столкновения вызываем метод разрушения пули.
             Destruction();
         }
     }
