@@ -41,7 +41,7 @@ public class PlanetsAndBonus : MonoBehaviour
 
             //Создаём бонус с условием ограничения движения игрока, и выше видимости камеры.
             Instantiate(obj_Bonus, new Vector2(Random.Range(MovePlayer.instanse.borders.minX, MovePlayer.instanse.borders.maxX),
-                MovePlayer.instanse.borders.maxY * 1.5f), Quaternion.identity);
+                MovePlayer.instanse.borders.maxY * 1.5f), Quaternion.identity); 
         }
     }
 

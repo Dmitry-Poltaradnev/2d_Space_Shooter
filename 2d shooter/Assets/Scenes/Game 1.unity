@@ -904,6 +904,9 @@ MonoBehaviour:
   - TimeToStart: 48
     wave: {fileID: 6366802413577839271, guid: 9235e7ef650f980488acb9c1643ae453, type: 3}
     is_Last_Wave: 0
+  - TimeToStart: 52
+    wave: {fileID: 318170490185365976, guid: 19759cb5753bf9a4b88f9ceebb913d48, type: 3}
+    is_Last_Wave: 0
 --- !u!1 &1106662131
 GameObject:
   m_ObjectHideFlags: 0
