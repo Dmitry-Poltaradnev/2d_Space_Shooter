@@ -8,6 +8,8 @@ TagManager:
   - Enemy
   - Bullet
   - Shield
+  - sl_HP
+  - sl_Shield
   layers:
   - Default
   - TransparentFX
@@ -68,4 +70,7 @@ TagManager:
     locked: 0
   - name: Player
     uniqueID: 1466479255
+    locked: 0
+  - name: UI
+    uniqueID: 1571226097
     locked: 0

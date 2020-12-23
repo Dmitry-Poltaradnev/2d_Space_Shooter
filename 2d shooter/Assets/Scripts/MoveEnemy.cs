@@ -5,7 +5,7 @@ using UnityEngine;
 public class MoveEnemy : MonoBehaviour
 {
     // Переменная для хранения жизни врага
-    public int enemy_Health; 
+    public int enemy_Health;
 
 
     [Space]// Добавляем переменную для пули врага.
@@ -34,8 +34,8 @@ public class MoveEnemy : MonoBehaviour
         {
             //Вызываем метод OpenFire который будет вызываться в случайный промежуток времени нашего интервала.
             Invoke("OpenFire", Random.Range(shot_Time_Min, shot_Time_Max));
-        }      
-        
+        }
+
     }
 
     private void Update()
@@ -70,7 +70,7 @@ public class MoveEnemy : MonoBehaviour
     private void OpenFire()
     {
         //Создаём условие в котором проверяем шанс выстрела
-        if (Random.value <(float)shot_Chance / 100)
+        if (Random.value < (float)shot_Chance / 100)
         {
             //Если мы можем сделать выстрел создаём пулю из позиции врага без вращения
             Instantiate(obj_Bullet, transform.position, Quaternion.identity);
@@ -88,7 +88,7 @@ public class MoveEnemy : MonoBehaviour
         //если у врага нет очков здоровья, то мы вызываем метод разрушения врага.
         if (enemy_Health <= 0)
         {
-            Destruction(); 
+            Destruction();
         }
     }
 
@@ -104,6 +104,11 @@ public class MoveEnemy : MonoBehaviour
             GetDamage(1);
             Player.instance.GetDamage(1); // Через ссылку созданную в классе Player передаём метод нанесения 1 damage игроку.
         }
-    } 
+        if (coll.tag == "Shield")
+        {
+            GetDamage(1);
+            Player.instance.GetDamageShield(1); 
+        }
+    }
 
 }
