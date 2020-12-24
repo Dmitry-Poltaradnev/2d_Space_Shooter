@@ -6,6 +6,9 @@ using UnityEngine;
 public class Guns// Cоздаём новый класс, который отвечает за вооружение игрока.
 {
     public GameObject obj_Central_Gun, obj_Right_Gun, obj_Left_Gun;// Добавляем в данный класс 3 переменные для оружия.
+
+    //Добавим 3 переменных системы частиц, для вспышек при выстреле
+    public ParticleSystem ps_Central_Gun, ps_Left_Gun, ps_Right_Gun;
 }
 
 public class PlayerShooting : MonoBehaviour
@@ -47,6 +50,14 @@ public class PlayerShooting : MonoBehaviour
         }
     }
 
+    private void Start()
+    {
+        //Добавим ссылки на системы частиц, которые являются компонентами у орудия игрока.
+        guns.ps_Central_Gun = guns.obj_Central_Gun.GetComponent<ParticleSystem>();
+        guns.ps_Left_Gun = guns.obj_Left_Gun.GetComponent<ParticleSystem>();
+        guns.ps_Right_Gun = guns.obj_Right_Gun.GetComponent<ParticleSystem>();
+    }
+
     private void Update()
     {
         //Используя таймер запускаем метод MakeAShot
@@ -74,12 +85,15 @@ public class PlayerShooting : MonoBehaviour
             //Первый режим стрельбы.
             case 1:
                 CreateBullet(obj_Bullet, guns.obj_Central_Gun.transform.position, Vector3.zero);
+                guns.ps_Central_Gun.Play();//Строка отвечающая за проигрывания партикла при выстреле.
                 break;
 
             //Второй режим стрельбы.
             case 2:
                 CreateBullet(obj_Bullet, guns.obj_Right_Gun.transform.position, Vector3.zero);
                 CreateBullet(obj_Bullet, guns.obj_Left_Gun.transform.position, Vector3.zero);
+                guns.ps_Left_Gun.Play();
+                guns.ps_Right_Gun.Play();
                 break;
 
             //Третий режим стрельбы. Стрельба из центра + боковые пушки под углом.
@@ -87,6 +101,9 @@ public class PlayerShooting : MonoBehaviour
                 CreateBullet(obj_Bullet, guns.obj_Central_Gun.transform.position, Vector3.zero);
                 CreateBullet(obj_Bullet, guns.obj_Right_Gun.transform.position, new Vector3(0, 0, -5));
                 CreateBullet(obj_Bullet, guns.obj_Left_Gun.transform.position, new Vector3(0, 0, 5));
+                guns.ps_Central_Gun.Play();
+                guns.ps_Left_Gun.Play();
+                guns.ps_Right_Gun.Play();
                 break;
 
             //Четвёртый режим стрельбы. Сразу 5 пуль, центр и боковые пушки под углом.
@@ -96,6 +113,9 @@ public class PlayerShooting : MonoBehaviour
                 CreateBullet(obj_Bullet, guns.obj_Right_Gun.transform.position, new Vector3(0, 0, -5));
                 CreateBullet(obj_Bullet, guns.obj_Left_Gun.transform.position, new Vector3(0, 0, 0));
                 CreateBullet(obj_Bullet, guns.obj_Left_Gun.transform.position, new Vector3(0, 0, 5));
+                guns.ps_Central_Gun.Play();
+                guns.ps_Left_Gun.Play();
+                guns.ps_Right_Gun.Play();                
                 break;
 
             // Пятый режим стрельбы, 5 пуль режим веера.
@@ -105,6 +125,9 @@ public class PlayerShooting : MonoBehaviour
                 CreateBullet(obj_Bullet, guns.obj_Right_Gun.transform.position, new Vector3(0, 0, -15));
                 CreateBullet(obj_Bullet, guns.obj_Left_Gun.transform.position, new Vector3(0, 0, 5));
                 CreateBullet(obj_Bullet, guns.obj_Left_Gun.transform.position, new Vector3(0, 0, 15));
+                guns.ps_Central_Gun.Play();
+                guns.ps_Left_Gun.Play();
+                guns.ps_Right_Gun.Play();
                 break;
         }
     }
