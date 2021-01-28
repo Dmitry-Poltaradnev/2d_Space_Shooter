@@ -1,6 +1,7 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
 [System.Serializable]/* Добавим новый класс через который будем взаимодействовать с волной. Делаем его Serializable 
                       для того чтобы его поля отображались в инспекторе.*/
@@ -31,6 +32,14 @@ public class LevelController : MonoBehaviour
     //Добавим bool переменную которая будет вызывать конец игры.
     private bool is_Final = false;
 
+    // Добавим меню паузы
+    public GameObject panel;
+    //Также добавил bool переменную для отслеживания игровой паузы
+    private bool _isPause;
+    //Добавим массив для хранения кнопок(Exit, Return, Restart)
+    public GameObject[] btnPause;
+
+
     private void Awake()
     {
         //Настраиваем ссылку на самого себя.
@@ -56,15 +65,62 @@ public class LevelController : MonoBehaviour
 
     private void Update()
     {
-        //При апдейте проеверяем победили, или проиграли: if bool = true && != объектов c тегом Enemy(победа).
-        if (is_Final == true && GameObject.FindGameObjectsWithTag("Enemy").Length == 0)
+        //При апдейте проеверяем победили, или проиграли: if bool = true && != объектов c тегом Enemy(победа). И проверка на нажатие кнопки Pause
+        if (is_Final == true && GameObject.FindGameObjectsWithTag("Enemy").Length == 0 && !_isPause)
         {
             Debug.Log("Win");
+            GamePause();
+            btnPause[1].SetActive(false);
         }
-        else if  (Player.instance == null)
+        else if  (Player.instance == null && !_isPause)
         {
             Debug.Log("Lose");
+            GamePause();            
         }
+    }
+
+    //Добавим метод GamePause()
+    public void GamePause()
+    {
+        //Вызов панели паузы
+        if (!_isPause)
+        {
+            _isPause = true;
+            //Останавливаем время игры
+            Time.timeScale = 0;
+            //Отобразим панель
+            panel.SetActive(true);
+            //Добавим условие где проверяем жив ли игрок, если жив значит будут доступны 2 кнопки Return и Exit
+            if (Player.instance != null)
+            {
+                btnPause[0].SetActive(false);
+                btnPause[1].SetActive(true);
+            }
+            //Добавим условие, если игрок погиб, то пауза появляется автоматом, и будут активны Restart и Exit
+            else
+            {
+                btnPause[0].SetActive(true);
+                btnPause[1].SetActive(false);
+            }
+
+        }
+        //Условие когда панель должна быть сокрыта
+        else
+        {
+            _isPause = false;
+            //Снимаем с паузы игру.
+            Time.timeScale = 1;
+            //Cкрываем панель паузы
+            panel.SetActive(false);
+        }
+    }
+    //Добавим метод для кнопки Restart
+    public void BtnRestartGame()
+    {
+        //При нажатии данной кнопки, снимаем игровую паузу.
+        Time.timeScale = 1;
+        //Далее загружаем текущую сцену по имени
+        SceneManager.LoadScene(SceneManager.GetActiveScene().name);
     }
 
     IEnumerator CreateEnemyWave(float delay, GameObject Wave, bool Final)// Пишем условие для со программы 
