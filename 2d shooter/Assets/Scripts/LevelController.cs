@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.SceneManagement;
+using UnityEngine.UI;//Подключаем UI для работы с текстом.
 
 [System.Serializable]/* Добавим новый класс через который будем взаимодействовать с волной. Делаем его Serializable 
                       для того чтобы его поля отображались в инспекторе.*/
@@ -15,7 +16,7 @@ public class EnemyWaves
 
     //Добавляем bool переменную отвечающую за конец игры. if is_Last_Wave  = true игра заканчивается.
     public bool is_Last_Wave;
-}                       
+}
 
 
 public class LevelController : MonoBehaviour
@@ -39,6 +40,9 @@ public class LevelController : MonoBehaviour
     //Добавим массив для хранения кнопок(Exit, Return, Restart)
     public GameObject[] btnPause;
 
+    //Добавим переменную через которую будем работать с текстом Score на панели.
+    public Text text_Score;
+
 
     private void Awake()
     {
@@ -54,6 +58,15 @@ public class LevelController : MonoBehaviour
     }
     private void Start()
     {
+        //Вызываем метод загрузки корабля при старте.
+        for (int i = 0; i < DataBase.instance.playerShipInfo.Length; i++)
+        {
+            //Проверяем в каком подмассиве находится 1 в первом элементе, его и будем загружать.
+            if (DataBase.instance.playerShipInfo[i][0] == 1)
+            {
+                LoadPlayer(i);
+            }
+        }
         //Создаём вражеские волны через цикл.
         for (int i = 0; i < enemyWaves.Length; i++)
         {
@@ -72,11 +85,28 @@ public class LevelController : MonoBehaviour
             GamePause();
             btnPause[1].SetActive(false);
         }
-        else if  (Player.instance == null && !_isPause)
+        else if (Player.instance == null && !_isPause)
         {
             Debug.Log("Lose");
-            GamePause();            
+            GamePause();
         }
+    }
+
+    //Добавим метод для работы с призовыми очками.
+    public void ScoreInGame(int score)
+    {
+        DataBase.instance.Score_Game += score;
+        //Отобразим данные очки в панели игрока.
+        text_Score.text = "Score: " + DataBase.instance.Score_Game.ToString();
+    }
+
+    //Добавим метод который будет загружать корабль игрока с метода DataBase
+    public void LoadPlayer(int ship)//Данный метод принимает int параметр через него он будет загружать корабль из массива  ( public GameObject[] playerShip; )
+    {
+        Instantiate(playerShip[ship]);
+        Player.instance.player_Health = DataBase.instance.playerShipInfo[ship][2];
+        MovePlayer.instanse.speed_Player = DataBase.instance.playerShipInfo[ship][3];
+        Player.instance.shield_Health = DataBase.instance.playerShipInfo[ship][4];
     }
 
     //Добавим метод GamePause()
@@ -117,11 +147,23 @@ public class LevelController : MonoBehaviour
     //Добавим метод для кнопки Restart
     public void BtnRestartGame()
     {
+        //При нажатии Restart, то значение промежуточных очков сбрасывается до 0.
+        DataBase.instance.Score_Game = 0;
+
         //При нажатии данной кнопки, снимаем игровую паузу.
         Time.timeScale = 1;
         //Далее загружаем текущую сцену по имени
         SceneManager.LoadScene(SceneManager.GetActiveScene().name);
     }
+
+    //Добавим метод для кнопки выхода.
+    public void BtnExitGame()
+    {
+        //При нажатии на эту кнопку мы будем сохранять промежуточные очки в основные, и переходить в главное меню игры.
+        DataBase.instance.SaveGame();
+        DataBase.instance.GameLoadScene("Menu");
+    }
+
 
     IEnumerator CreateEnemyWave(float delay, GameObject Wave, bool Final)// Пишем условие для со программы 
     {
@@ -140,7 +182,7 @@ public class LevelController : MonoBehaviour
         {
             is_Final = true;
         }
-        
+
     }
 
 }

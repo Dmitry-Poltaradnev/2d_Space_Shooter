@@ -7,6 +7,8 @@ public class MoveEnemy : MonoBehaviour
     // Переменная для хранения жизни врага
     public int enemy_Health;
 
+    //Добавим переменную которой будем настраивать кол-во очков за разрушение врага.
+    public int Score_value;
 
     [Space]// Добавляем переменную для пули врага.
     public GameObject obj_Bullet;
@@ -94,6 +96,8 @@ public class MoveEnemy : MonoBehaviour
 
     public void Destruction()// метод разрушения врага. При его вызове объект уничтожается.
     {
+        //Если враг будет уничтожен, то он будет вызывать данный метод и передавать в него значения которые будут засчитываться как очки.
+        LevelController.instance.ScoreInGame(Score_value);
         Destroy(gameObject);
     }
 

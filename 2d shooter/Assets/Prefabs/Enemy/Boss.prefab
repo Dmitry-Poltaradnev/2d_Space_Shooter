@@ -146,6 +146,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   enemy_Health: 20
+  Score_value: 250
   obj_Bullet: {fileID: 9144932695722573973, guid: 62a21682104566a4eb3cdf2fddcf1c92, type: 3}
   shot_Time_Min: 3
   shot_Time_Max: 5

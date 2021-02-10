@@ -146,10 +146,15 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   enemy_Health: 4
+  Score_value: 20
   obj_Bullet: {fileID: 9144932695722573973, guid: 62a21682104566a4eb3cdf2fddcf1c92, type: 3}
   shot_Time_Min: 1.05
   shot_Time_Max: 2.8
   shot_Chance: 100
+  is_Boss: 0
+  obj_Bullet_Boss: {fileID: 0}
+  time_Bullet_Boss_Spawn: 0
+  shot_Chance_Boss: 0
 --- !u!58 &-282897252100328545
 CircleCollider2D:
   m_ObjectHideFlags: 0
