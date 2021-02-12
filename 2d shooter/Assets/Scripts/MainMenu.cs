@@ -207,20 +207,121 @@ public class MainMenu : MonoBehaviour
             //Далее прячем кнопку покупки.
             btn_Shop_Buy.SetActive(false);
         }
+        //Добавим условие если выбранный корабль ещё не куплен, но у нас хватает очков для покупки.
+        if (DataBase.instance.playerShipInfo[num][1] != 0 && DataBase.instance.playerShipInfo[num][1] <= DataBase.instance.Score)
+        {
+            //Отобразим кнопку покупки.
+            btn_Shop_Buy.SetActive(true);
+            //В ней покажем стоимость корабля.
+            shop_Btn_Buy_Cost_Text.text = "Buy " + DataBase.instance.playerShipInfo[num][1].ToString();
+            /*Cохраним во втором индексе данный корабль, мы так делаем т.к можем купить данный корабль, но не нажали кнопку покупки, если имели лишь 1 индекс, то при 
+             * выходе из магазина он был бы не сохранён, но выбран данный корабль и мы могли бы его использовать */
+            _index = num;
+        }
+        //Добавим условие при котором мы не купили корабль и нам не хватает очков для его покупки, в данном случае кнопка покупки будет скрыта.
+        if (DataBase.instance.playerShipInfo[num][1] != 0 && DataBase.instance.playerShipInfo[num][1] > DataBase.instance.Score)
+        {
+            btn_Shop_Buy.SetActive(false);
+        }
+        //Вызываем метод подсветки корабля, он нужен для обновления т.к мы приобрели корабль и нужно обновить текст и подсветку.
+        ShopShipHighLighting();
     }
+    //Добавим метод для кнопки Buy.
+    public void Btn_ShopBuyShip()
+    {
+        //Если нажата эта кнопка, то мы хотим приобрести данный корабль и все условия для этого соблюдены.
+        _index = _indexBuy;
+        //Из очков игрока вычитаем стоимость покупки.
+        DataBase.instance.Score = DataBase.instance.Score - DataBase.instance.playerShipInfo[_index][1];
+        //У купленного корабля обнуляем значение цены до 0.
+        DataBase.instance.playerShipInfo[_index][0] = 0;
+        //Вызываем метод обновления очков.
+        UpdateScore();
+        //Вызываем метод который проверяет выбранный корабль, чтобы спрятать кнопку покупки. 
+        ShopCheckPlayerShip(_index);
+        //Перезаписываем информацию о выбранном корабле.
+        for (int i = 0; i < DataBase.instance.playerShipInfo.Length; i++)
+        {
+            DataBase.instance.playerShipInfo[i][0] = 0;
+        }
+        DataBase.instance.playerShipInfo[_index][0] = 1;
+        //Вызываем метод подсветки корабля для изменения цвета корабля и текста под ним. 
+        ShopShipHighLighting();
+    }
+    #endregion
 
+    #region Upgrade
+    //Добавим метод который будет получать информацию о корабле который выбран.
+    public void UpgradeGetInformation()
+    {
+        //В панели покажем изображение корабля который сейчас выбран.
+        upgrade_Sprite_Ship.GetComponent<Image>().sprite = upgrade_Sprite_Ships[_index];
 
+        //Покажем стоимость улучшений для очков жизни.
+        upgrade_Show_Cost[0].text = "Cost: " + DataBase.instance.costHP.ToString();
+
+        //Покажем стоимость улучшения для скорости.
+        upgrade_Show_Cost[1].text = "Cost: " + DataBase.instance.costSPEED.ToString();
+
+        //Покажем стоимость улучшения для очков щита.
+        upgrade_Show_Cost[2].text = "Cost: " + DataBase.instance.costShield.ToString();
+
+        //Через ползунок покажем улучшение очков жизни макс. значение 15.
+        uprade_Sliders[0].value = (float)DataBase.instance.playerShipInfo[_index][2] / 15;
+        //Через ползунок покажем прогресс изменения скорости макс. кол-во будет 20.
+        uprade_Sliders[1].value = (float)DataBase.instance.playerShipInfo[_index][3] / 20;
+        //Через ползунок покажем прогресс увеличения очков жизни щита макс кол-во улучшений будет 6.
+        uprade_Sliders[2].value = (float)DataBase.instance.playerShipInfo[_index][4] / 6;
+    }
+    //Добавим метод upgrade
+    public void Btn_Upgrade(int index)
+    {
+        //Улучшение HP
+        //Если index = 1 и очков хватает на покупку, и upgrade не максимальный.
+        if (index  == 0 && DataBase.instance.Score > DataBase.instance.costHP && DataBase.instance.playerShipInfo[_index][2] < 15)
+        {
+            //Отображаем стоимость upgrade она фиксированная.
+            upgrade_Show_Cost[0].text = "Cost: " + DataBase.instance.costHP.ToString();
+            DataBase.instance.Score -= DataBase.instance.costHP;
+            DataBase.instance.playerShipInfo[_index][2] += 1;
+            uprade_Sliders[0].value += (float)1 / 15;
+        }
+        //Улучшение скорости.
+        if (index == 1 && DataBase.instance.Score > DataBase.instance.costSPEED && DataBase.instance.playerShipInfo[_index][3] < 20)
+        {
+            //Отображаем стоимость upgrade она фиксированная.
+            upgrade_Show_Cost[1].text = "Cost: " + DataBase.instance.costSPEED.ToString();
+            DataBase.instance.Score -= DataBase.instance.costSPEED;
+            DataBase.instance.playerShipInfo[_index][3] += 1;
+            uprade_Sliders[1].value += (float)1 / 20;
+        }
+        //Улучшение щита.
+        if (index == 2 && DataBase.instance.Score > DataBase.instance.costShield && DataBase.instance.playerShipInfo[_index][4] < 6)
+        {
+            //Отображаем стоимость upgrade она фиксированная.
+            upgrade_Show_Cost[2].text = "Cost: " + DataBase.instance.costShield.ToString();
+            DataBase.instance.Score -= DataBase.instance.costShield;
+            DataBase.instance.playerShipInfo[_index][4] += 1;
+            uprade_Sliders[2].value += (float)1 / 6;
+        }
+        //Вызываем метод обновления очков.
+        UpdateScore();
+    }
     #endregion
 
 
     //Добавим метод который будет который будет отображать панель.
     public void Show_Change_Panel(int index)
     {
+        //Каждый раз когда мы открываем панель, то должны выбирать проверять какой корабль выбран.
+        ShopShipHighLighting();
         game_Panels[index].SetActive(true);
     }
     //Добавим метод для сокрытия панели.
     public void Hide_Change_Panel(int index)
     {
+        //При закрытие панели мы сохраняем все изменения совершённые в ней.(покупки, выбор корабля и т.д)
+        BtnSave();
         game_Panels[index].SetActive(false);
     }
 }

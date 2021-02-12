@@ -43,7 +43,7 @@ public class Player : MonoBehaviour
     private void Start()
     {
         //Устанавливаем ползунок равный жизни игрока.
-        slider_hp_Player.value = (float)player_Health / 10; // Делим на 10 т.к значение ползунка от 0 до 10.          
+        slider_hp_Player.value = (float)player_Health / 15; // Делим на 10 т.к значение ползунка от 0 до 10.          
 
         //Проверяем щит, если есть очки жизни делаем его видимым.
         if (shield_Health != 0)
@@ -51,7 +51,7 @@ public class Player : MonoBehaviour
             //Показать щит.
             obj_Shield.SetActive(true);
             //Устанавливаем ползунок равный щиту игрока.
-            slider_hp_Shield.value = (float)shield_Health / 10;
+            slider_hp_Shield.value = (float)shield_Health / 6;
         }
         //При отсутствии хп, щит не появляется.
         else
