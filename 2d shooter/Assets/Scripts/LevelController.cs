@@ -58,6 +58,8 @@ public class LevelController : MonoBehaviour
     }
     private void Start()
     {
+        //Если не добавить данный код, то игровое время после выхода и последующего входа в игру будет заморожено.
+        Time.timeScale = 1;
         //Вызываем метод загрузки корабля при старте.
         for (int i = 0; i < DataBase.instance.playerShipInfo.Length; i++)
         {

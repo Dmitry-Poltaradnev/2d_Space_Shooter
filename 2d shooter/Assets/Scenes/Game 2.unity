@@ -1021,7 +1021,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: a0aabd84f60ecdc4bb37ab8c1d7c8e04, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  speed: -1.3
+  speed: -3.4
 --- !u!1 &519420028
 GameObject:
   m_ObjectHideFlags: 0
@@ -1927,7 +1927,7 @@ MonoBehaviour:
     wave: {fileID: 7634358095408197637, guid: 7d1b9cf150730e347adc2e4d895c53bf, type: 3}
     is_Last_Wave: 0
   - TimeToStart: 20
-    wave: {fileID: 6366802413577839271, guid: 9235e7ef650f980488acb9c1643ae453, type: 3}
+    wave: {fileID: 2090199711580416350, guid: bd17ad25716a3d84d876f4bb2ea04438, type: 3}
     is_Last_Wave: 0
   - TimeToStart: 25
     wave: {fileID: 6499070629625801281, guid: 7f7ccd5168e74a7408aab83699347612, type: 3}
@@ -1951,6 +1951,18 @@ MonoBehaviour:
     wave: {fileID: 6366802413577839271, guid: 9235e7ef650f980488acb9c1643ae453, type: 3}
     is_Last_Wave: 0
   - TimeToStart: 52
+    wave: {fileID: 1102861313231736880, guid: 756855f6aba46f24e80e5c6d35d26649, type: 3}
+    is_Last_Wave: 0
+  - TimeToStart: 52
+    wave: {fileID: 6499070629625801281, guid: 7f7ccd5168e74a7408aab83699347612, type: 3}
+    is_Last_Wave: 0
+  - TimeToStart: 52
+    wave: {fileID: 6366802413577839271, guid: 9235e7ef650f980488acb9c1643ae453, type: 3}
+    is_Last_Wave: 0
+  - TimeToStart: 52
+    wave: {fileID: 318170490185365976, guid: 19759cb5753bf9a4b88f9ceebb913d48, type: 3}
+    is_Last_Wave: 1
+  - TimeToStart: 2
     wave: {fileID: 318170490185365976, guid: 19759cb5753bf9a4b88f9ceebb913d48, type: 3}
     is_Last_Wave: 0
   panel: {fileID: 26007017}
@@ -2634,7 +2646,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: a0aabd84f60ecdc4bb37ab8c1d7c8e04, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  speed: -0.9
+  speed: -2.2
 --- !u!1 &1890605527
 GameObject:
   m_ObjectHideFlags: 0
@@ -3126,7 +3138,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: a0aabd84f60ecdc4bb37ab8c1d7c8e04, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  speed: -0.6
+  speed: -1.6
 --- !u!1 &2076340998
 GameObject:
   m_ObjectHideFlags: 0
