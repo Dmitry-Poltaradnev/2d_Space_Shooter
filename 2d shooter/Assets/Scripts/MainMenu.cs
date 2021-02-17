@@ -96,12 +96,12 @@ public class MainMenu : MonoBehaviour
     //Добавим ссылку на изображение корабля в панели Upgrade, в неё будем помещать изображение выбранного корабля.
     public GameObject upgrade_Sprite_Ship;
     //Добавим массив для хранения ползунков.
-    public Slider[] uprade_Sliders;
+    public Slider[] uprade_Sliders; 
     //Добавим массив для текста, он нужен для отображения цен Upgarada.
     public Text[] upgrade_Show_Cost;
 
     //Добавим индекс корабля который уже куплен и выбран на данный момент.
-    private int _index;
+    private int _index; 
     //Добавим второй индекс в котором будет сохранён выбранный корабль если он ещё не куплен, если мы купим данный корабль значение этого индекса перейдёт в основной индекс.
     private int _indexBuy;
 
@@ -157,13 +157,13 @@ public class MainMenu : MonoBehaviour
 
     #region Shop...
     //Данный метод будет подсвечивать кнопки кораблей по разному в зависимости куплен корабль, выбран или не выбран.
-    public void ShopShipHighLighting()
+    public void ShopShipHighLighting() 
     {
         //В цикле проверяем какой корабль был куплен и изначально загружен в игру.
         for (int i = 0; i < DataBase.instance.playerShipInfo.Length; i++)
         {
             //Создаём условие в котором ищем 1 в первом элементе подмассива.
-            if (DataBase.instance.playerShipInfo[i][0] == 1)
+            if (DataBase.instance.playerShipInfo[i][0] == 1)   
             {
                 //Задаём компоненту Image белый цвет
                 shop_Ships[i].GetComponent<Image>().color = Color.white;
@@ -179,7 +179,7 @@ public class MainMenu : MonoBehaviour
             }
             //Настроем текст под каждым кораблём, в цикле проверяем не только 1-й элемент подмассива,но и второй отвечающий за стоимость корабля.
             //Создаём условие, если значение равно 0 то корабль куплен и текст под ним будет иметь значение Open.
-            if (DataBase.instance.playerShipInfo[i][1] == 0)
+            if (DataBase.instance.playerShipInfo[i][1] == 0)  
             {
                 shop_Ship_Text[i].text = "Open";
             }
@@ -191,7 +191,7 @@ public class MainMenu : MonoBehaviour
     }
 
     //Добавим метод проверки выбранного корабля, он принемает 1 параметр.
-    public void ShopCheckPlayerShip(int num)
+    public void ShopCheckPlayerShip(int num) 
     {
         //Добавляем условие, если у корабля который мы выбрали нет цены, то мы можем выбрать данный корабль для игры.
         if (DataBase.instance.playerShipInfo[num][1] == 0)
@@ -216,12 +216,12 @@ public class MainMenu : MonoBehaviour
             shop_Btn_Buy_Cost_Text.text = "Buy " + DataBase.instance.playerShipInfo[num][1].ToString();
             /*Cохраним во втором индексе данный корабль, мы так делаем т.к можем купить данный корабль, но не нажали кнопку покупки, если имели лишь 1 индекс, то при 
              * выходе из магазина он был бы не сохранён, но выбран данный корабль и мы могли бы его использовать */
-            _index = num;
+            _indexBuy = num;
         }
         //Добавим условие при котором мы не купили корабль и нам не хватает очков для его покупки, в данном случае кнопка покупки будет скрыта.
         if (DataBase.instance.playerShipInfo[num][1] != 0 && DataBase.instance.playerShipInfo[num][1] > DataBase.instance.Score)
         {
-            btn_Shop_Buy.SetActive(false);
+            btn_Shop_Buy.SetActive(false); 
         }
         //Вызываем метод подсветки корабля, он нужен для обновления т.к мы приобрели корабль и нужно обновить текст и подсветку.
         ShopShipHighLighting();
@@ -232,9 +232,9 @@ public class MainMenu : MonoBehaviour
         //Если нажата эта кнопка, то мы хотим приобрести данный корабль и все условия для этого соблюдены.
         _index = _indexBuy;
         //Из очков игрока вычитаем стоимость покупки.
-        DataBase.instance.Score = DataBase.instance.Score - DataBase.instance.playerShipInfo[_index][1];
+        DataBase.instance.Score = DataBase.instance.Score - DataBase.instance.playerShipInfo[_index][1]; 
         //У купленного корабля обнуляем значение цены до 0.
-        DataBase.instance.playerShipInfo[_index][0] = 0;
+        DataBase.instance.playerShipInfo[_index][1] = 0; 
         //Вызываем метод обновления очков.
         UpdateScore();
         //Вызываем метод который проверяет выбранный корабль, чтобы спрятать кнопку покупки. 
