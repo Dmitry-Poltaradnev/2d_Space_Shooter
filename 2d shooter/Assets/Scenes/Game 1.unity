@@ -232,8 +232,8 @@ RectTransform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 988378458}
-  - {fileID: 798536587}
   - {fileID: 1340953829}
+  - {fileID: 798536587}
   m_Father: {fileID: 817844608}
   m_RootOrder: 1
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -566,7 +566,7 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 0}
+      - m_Target: {fileID: 1005405336}
         m_TargetAssemblyTypeName: LevelController, Assembly-CSharp
         m_MethodName: GamePause
         m_Mode: 1
@@ -1138,7 +1138,7 @@ AudioSource:
   OutputAudioMixerGroup: {fileID: 0}
   m_audioClip: {fileID: 8300000, guid: 52670209ace04414a87fd880bd7b384a, type: 3}
   m_PlayOnAwake: 1
-  m_Volume: 1
+  m_Volume: 0.189
   m_Pitch: 1
   Loop: 1
   Mute: 0
@@ -1533,7 +1533,7 @@ RectTransform:
   m_Children:
   - {fileID: 2587028}
   m_Father: {fileID: 26007018}
-  m_RootOrder: 1
+  m_RootOrder: 2
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
@@ -1583,7 +1583,7 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 0}
+      - m_Target: {fileID: 1005405336}
         m_TargetAssemblyTypeName: LevelController, Assembly-CSharp
         m_MethodName: BtnRestartGame
         m_Mode: 1
@@ -1815,7 +1815,7 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 0}
+      - m_Target: {fileID: 1005405336}
         m_TargetAssemblyTypeName: LevelController, Assembly-CSharp
         m_MethodName: GamePause
         m_Mode: 1
@@ -1952,7 +1952,7 @@ MonoBehaviour:
     is_Last_Wave: 0
   - TimeToStart: 52
     wave: {fileID: 318170490185365976, guid: 19759cb5753bf9a4b88f9ceebb913d48, type: 3}
-    is_Last_Wave: 0
+    is_Last_Wave: 1
   panel: {fileID: 26007017}
   btnPause:
   - {fileID: 798536586}
@@ -2127,7 +2127,7 @@ RectTransform:
   m_Children:
   - {fileID: 1593729505}
   m_Father: {fileID: 26007018}
-  m_RootOrder: 2
+  m_RootOrder: 1
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
